@@ -1,6 +1,7 @@
 import requests
 from datetime import datetime
 import mysql.connector
+from dateutil import parser
 
 def get_db_connection():
     conn = mysql.connector.connect(
@@ -31,6 +32,7 @@ def fetch_and_store_data():
 
         if datos and datos['coins']:
             for coin in datos['coins']:
+                last_updated = parser.parse(coin['last_updated']).strftime('%Y-%m-%d %H:%M:%S')
                 cur.execute('''
                     INSERT INTO crypto_data (id, name, symbol, slug, price, market_cap, volume_24h, circulating_supply, percent_change_1h, percent_change_24h, percent_change_7d, cmc_rank, last_updated, import_date)
                     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
@@ -47,8 +49,8 @@ def fetch_and_store_data():
                     coin['quote']['USD']['percent_change_24h'],
                     coin['quote']['USD']['percent_change_7d'],
                     coin['cmc_rank'],
-                    coin['last_updated'],
-                    datetime.now()
+                    last_updated,
+                    datetime.now().strftime('%Y-%m-%d %H:%M:%S')  # Añade la fecha de importación
                 ))
             start += limite_por_pagina
         else:

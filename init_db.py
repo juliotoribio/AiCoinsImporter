@@ -28,7 +28,8 @@ def create_tables():
             percent_change_7d DECIMAL(10, 2),
             cmc_rank INT,
             last_updated DATETIME,
-            import_date DATETIME
+            import_date DATETIME,
+            snapshot DATETIME
         );
     ''')
     conn.commit()

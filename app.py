@@ -17,7 +17,7 @@ def get_db_connection():
 def index():
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('SELECT name, symbol, price, market_cap, volume_24h, cmc_rank, last_updated FROM crypto_data;')
+    cur.execute('SELECT name, symbol, price, market_cap, volume_24h, cmc_rank, last_updated, import_date FROM crypto_data;')
     data = cur.fetchall()
     cur.close()
     conn.close()

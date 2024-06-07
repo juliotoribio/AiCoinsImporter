@@ -15,6 +15,7 @@
             <th>Volume (24h)</th>
             <th>CMC Rank</th>
             <th>Last Updated</th>
+            <th>Import Date</th>
         </tr>
         {% for row in data %}
         <tr>
@@ -25,6 +26,7 @@
             <td>{{ row[4] }}</td>
             <td>{{ row[5] }}</td>
             <td>{{ row[6] }}</td>
+            <td>{{ row[7] }}</td>
         </tr>
         {% endfor %}
     </table>
